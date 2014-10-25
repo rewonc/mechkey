@@ -30,7 +30,7 @@ $(document).ready(function(){
       return;
     console.log(counter.down);
     audioDown[counter.down].play();
-    inc('Down');
+    inc('down');
     downKeys[e.which] = true;
   });
 });
