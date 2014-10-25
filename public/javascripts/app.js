@@ -1,35 +1,36 @@
 $(document).ready(function(){
-  var audioup = [];
-  var audiodown = [];
-  var counterUp = 0;
-  var counterDown = 0;
+  var NUM_AUDIO = 10;
+  var audioUp = [];
+  var audioDown = [];
+  var counter = {
+    up: 0,
+    down: 0
+  };
+  var downKeys = [];
 
-  for(var i=0;i<11;i++){
-    audioup[i] = new Audio('keyup.mp3');
+  for(var i = 0; i < NUM_AUDIO; i++) {
+    audioUp[i] = new Audio('keyup.mp3');
+    audioDown[i] = new Audio('keydown.mp3');
   }
 
-  for(var i=0;i<11;i++){
-    audiodown[i] = new Audio('keydown.mp3');
-  }
+  var inc = function(key) {
+    counter[key]++;
+    counter[key] %= NUM_AUDIO;
+  };
 
-
-  var incUp = function(){
-    if(counterUp < 10){ counterUp++;  } 
-    else            { counterUp = 0 }
-  }
-  var incDown = function(){
-    if(counterDown < 10){ counterDown++;  } 
-    else            { counterDown = 0 }
-  }
-
-  $('#typing').keyup(function(){
-    console.log(counterUp);
-    audioup[counterUp].play();
-    incUp();
+  $('#typing').keyup(function(e) {
+    console.log(counter.up);
+    audioUp[counter.up].play();
+    inc('up');
+    downKeys[e.which] = false;
   });
-  $('#typing').keydown(function(){
-    console.log(counterDown);
-    audiodown[counterDown].play();
-    incDown();
+
+  $('#typing').keydown(function(e){
+    if (downKeys[e.which])
+      return;
+    console.log(counter.down);
+    audioDown[counter.down].play();
+    inc('Down');
+    downKeys[e.which] = true;
   });
 });
