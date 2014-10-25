@@ -9,8 +9,8 @@ $(document).ready(function(){
   var downKeys = [];
 
   for(var i = 0; i < NUM_AUDIO; i++) {
-    audioUp[i] = new Audio('keyup.mp3');
-    audioDown[i] = new Audio('keydown.mp3');
+    //audioUp[i] = new Audio('keyup.mp3');
+    audioDown[i] = new Audio('laptop.mp3');
   }
 
   var inc = function(key) {
@@ -20,7 +20,7 @@ $(document).ready(function(){
 
   $('#typing').keyup(function(e) {
     console.log(counter.up);
-    audioUp[counter.up].play();
+    //audioUp[counter.up].play();
     inc('up');
     downKeys[e.which] = false;
   });
